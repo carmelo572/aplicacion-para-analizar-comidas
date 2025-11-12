@@ -1,0 +1,144 @@
+import { Camera, History, User, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
+
+const Index = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-success-light to-background">
+      {/* Header */}
+      <header className="px-6 pt-8 pb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+              NutriScan
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">Tu asistente nutricional</p>
+          </div>
+          <div className="flex gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/install")}
+              className="rounded-full"
+              title="Instalar app"
+            >
+              <Download className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => navigate("/profile")}
+              className="rounded-full"
+            >
+              <User className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="px-6 py-8 space-y-8">
+        {/* Camera Button - Hero Element */}
+        <div className="flex flex-col items-center gap-6">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 rounded-full blur-2xl opacity-30 animate-pulse" />
+            <Button
+              onClick={() => navigate("/capture")}
+              size="lg"
+              className="relative h-32 w-32 rounded-full bg-gradient-to-br from-primary to-primary/90 hover:from-primary/90 hover:to-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              <Camera className="h-12 w-12" />
+            </Button>
+          </div>
+          <div className="text-center">
+            <h2 className="text-xl font-semibold mb-1">Escanea tu comida</h2>
+            <p className="text-sm text-muted-foreground">Toca para tomar una foto</p>
+          </div>
+        </div>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-3 gap-4">
+          <Card className="p-4 text-center border-0 shadow-md">
+            <p className="text-2xl font-bold text-primary">0</p>
+            <p className="text-xs text-muted-foreground mt-1">Comidas hoy</p>
+          </Card>
+          <Card className="p-4 text-center border-0 shadow-md">
+            <p className="text-2xl font-bold text-primary">0</p>
+            <p className="text-xs text-muted-foreground mt-1">kcal</p>
+          </Card>
+          <Card className="p-4 text-center border-0 shadow-md">
+            <p className="text-2xl font-bold text-primary">0</p>
+            <p className="text-xs text-muted-foreground mt-1">Escaneos</p>
+          </Card>
+        </div>
+
+        {/* Recent Meals Section */}
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">Comidas recientes</h3>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate("/history")}
+              className="text-primary"
+            >
+              Ver todo
+            </Button>
+          </div>
+
+          {/* Empty State */}
+          <Card className="p-8 text-center border-2 border-dashed">
+            <div className="flex flex-col items-center gap-3">
+              <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                <History className="h-8 w-8 text-muted-foreground" />
+              </div>
+              <div>
+                <p className="font-medium text-foreground">Sin comidas registradas</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Toma tu primera foto para comenzar
+                </p>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </main>
+
+      {/* Bottom Navigation */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-card border-t px-6 py-4 safe-area-bottom">
+        <div className="flex justify-around items-center max-w-md mx-auto">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="flex-col h-auto py-2 gap-1"
+          >
+            <Camera className="h-5 w-5 text-primary" />
+            <span className="text-xs font-medium text-primary">Inicio</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/history")}
+            className="flex-col h-auto py-2 gap-1"
+          >
+            <History className="h-5 w-5" />
+            <span className="text-xs">Historial</span>
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/profile")}
+            className="flex-col h-auto py-2 gap-1"
+          >
+            <User className="h-5 w-5" />
+            <span className="text-xs">Perfil</span>
+          </Button>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export default Index;
